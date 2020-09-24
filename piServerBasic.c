@@ -81,6 +81,7 @@ int main(int argc, char *argv[]){
     
     bzero(buffer,256);
     n = read(newsockfd,buffer,255);
+    fprintf(stdout,"%s\n",buffer);
     if (n < 0) error((const char*)"ERROR reading from socket");
     n = write(newsockfd,"Message recieved",18);
     if (n < 0) error((const char*)"ERROR writing to socket");
