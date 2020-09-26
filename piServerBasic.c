@@ -20,8 +20,6 @@
 #include <unistd.h>
 #include <errno.h>
 
-#define bzero(b,len) (memset((b), '\0', (len)), (void) 0)
-
 void make_comm(int,int);
 void error ( const char *msg ){
     perror ( msg );
@@ -56,8 +54,7 @@ int main(int argc, char *argv[]){
     if (sockfd < 0){
         error( (const char *)"Error opening socket" );
     }
-    // Initialises a buffer of 0s.  Could also use memset.
-    bzero((char *) &serv_addr, sizeof(serv_addr));
+    memset((char*)&serv_addr,'\0',sizeof(serv_addr));
      
     // Set parameters of the server
     serv_addr.sin_family = AF_INET;
@@ -79,7 +76,7 @@ int main(int argc, char *argv[]){
     newsockfd = accept(sockfd, (struct sockaddr *) &cli_addr, (socklen_t*) &clilen);
     if (newsockfd < 0) error((const char*)"Error on accepting connection");
     
-    bzero(buffer,256);
+    memset(buffer,'\0',256);
     n = read(newsockfd,buffer,255);
     fprintf(stdout,"%s\n",buffer);
     if (n < 0) error((const char*)"ERROR reading from socket");

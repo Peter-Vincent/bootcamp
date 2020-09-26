@@ -15,9 +15,6 @@
 #include <errno.h>
 #include <stdbool.h>
 
-#define bzero(b,len) (memset((b), '\0', (len)), (void) 0)
-
-
 void error(const char *msg)
 {
     perror(msg);
@@ -43,7 +40,7 @@ int main(int argc, char *argv[])
         fprintf(stderr,"Host not found, check arguments\n");
         exit(1);
     }
-    bzero((char*)&serv_addr,sizeof(serv_addr));
+    memset((char*)&serv_addr,'\0',sizeof(serv_addr));
     serv_addr.sin_family = AF_INET;
     bcopy((char*)server -> h_addr_list[0],(char*)&serv_addr.sin_addr.s_addr,
     server->h_length);
@@ -51,11 +48,11 @@ int main(int argc, char *argv[])
 
     if (connect(sockfd,(struct sockaddr*)&serv_addr,sizeof(serv_addr)) < 0) error((const char *) "ERROR connecting");
     printf("Enter command now \n");
-    bzero(buffer,256);
+    memset(buffer,'\0',256);
     fgets(buffer,255,stdin);
     n = write(sockfd,buffer,strlen(buffer));
     if (n < 0) error((const char*)"ERROR writing to socket");
-    bzero(buffer,256);
+    memset(buffer,'\0',256);
     n = read(sockfd,buffer,255);
     if (n < 0) error((const char*)"ERROR reading from socket");
     fprintf(stdout,"%s\n",buffer);
