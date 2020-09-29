@@ -20,12 +20,14 @@ You should now be able to follow the instructions on the github page and run the
 3. `ModuleNotFoundError`
 - As opposed to the edgetpu error where a linux library needs to be installed, most of these can be resolved by using `pip3 install <module>`.  Make sure you use `pip3` and not `pip`, otherwise you will only install for python2(.7).  If it still reports that the modules are missing, check the path that Python3 is using to search for the modules.  Talk to us if you're unsure.
 
-IF you're still working natively on your robot pi with the monitor plugged in, you should be able to see the segmentation live.  If you're remoting in, you won't.  At this point, all parties will be wanting to figure out a way to view the video stream when the monitor isn't plugged in.  There are 3 options for this...
+### Visualising the results
+
+If you're still working natively on your robot pi with the monitor plugged in, you should be able to see the segmentation live.  If you're remoting in, you won't.  At this point, all parties will be wanting to figure out a way to view the video stream when the monitor isn't plugged in.  There are 3 options for this...
 1. X11 Forwarding.  This is a common protocol for displaying graphical interfaces on a remote machine.
 2. Broadcast the output of the video to a hosted website, like we did earlier
 3. Something else.  Perhaps forwarding the raw data of a TCP connection using the server/client we set up earlier.
 
-Here I will talk about option 2.  You're very welcome to try the other options (1 is fairly simple, 3 is not) - let us know if you want some help.
+Here I will talk about option 2.  You're very welcome to try the other options (1 is fairly simple, 3 is not as difficult as I expected) - let us know if you want some help.
 
 ### Broadcasting your segmentation to a locally hosted website
-The easiest way of doing this is to edit the `Callback` class inside `bodypix.py` using the web hosting program you build previously as a guide.
+Looking inside the project-bodypix repo, there are a couple of places where the image is "exposed".  One in in `Callback.__call__()` in `bodypix.py` where the shaded image is returned as `np.uint8`.  Another place is in `on_new_sample()` in `gstreamer.py`.  You might find it interesting to dig into the [gstreamer](https://gstreamer.freedesktop.org/ "gstreamer") documentation.

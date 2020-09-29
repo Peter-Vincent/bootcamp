@@ -8,4 +8,8 @@ So far you have a server and client set-up that allows you to communicate inform
 
 ## Setting up the camera on your Pi
 
-This is the bit we've all been waiting for.  Plug the camera into your Pi as directed by by the instructions on github.  The picamera software is already installed on your Pi but you will need to enable it by doing 
+This is the bit we've all been waiting for.  Plug the camera into your Pi as directed by by the instructions on github, and make sure the required software is installed following the instructions [here](https://picamera.readthedocs.io/en/release-1.13/install.html "picamera")
+
+## Streaming your camera to the web
+
+This is pretty easy, because there is pre-built code that already works, straight from the [picamera documentation](https://picamera.readthedocs.io/en/release-1.13/recipes2.html#web-streaming "streamy boi").  I encourage you to play around with this code and try and understand whats going on.
