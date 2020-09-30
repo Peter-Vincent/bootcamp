@@ -27,7 +27,3 @@ If you're still working natively on your robot pi with the monitor plugged in, y
 2. Broadcast the output of the video to a hosted website, like we did earlier
 3. Something else.  Perhaps forwarding the raw data of a TCP connection using the server/client we set up earlier.
 
-Here I will talk about option 2.  You're very welcome to try the other options (1 is fairly simple, 3 is not as difficult as I expected) - let us know if you want some help.
-
-### Broadcasting your segmentation to a locally hosted website
-Looking inside the project-bodypix repo, there are a couple of places where the image is "exposed".  One in in `Callback.__call__()` in `bodypix.py` where the shaded image is returned as `np.uint8`.  Another place is in `on_new_sample()` in `gstreamer.py`.  You might find it interesting to dig into the [gstreamer](https://gstreamer.freedesktop.org/ "gstreamer") documentation.
